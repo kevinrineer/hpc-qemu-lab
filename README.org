@@ -37,6 +37,7 @@ The rationale for why this exists when hpc-toolset-tutorial already does is that
 - This lab presumes that Rocky Linux is the target Linux distribution for the cluster
 
 * Project Structure
+  #+BEGIN_SRC shell
 hpc-qemu-lab/
 ├── ansible/                     # Ansible provisioning roles and inventory to configure the "Central IT" and head nodes
 ├── docs/                        # Lab walkthroughs and learning materials (coming eventually)
@@ -50,6 +51,7 @@ hpc-qemu-lab/
 ├── README.org                   # This file
 ├── LICENSE
 └── references.bib               # for Org-mode citation support
+  #+END_SRC
 
 * Usage
 
