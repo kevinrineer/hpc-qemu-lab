@@ -1,0 +1,56 @@
+#+TITLE: QEMU Lab TODOs
+#+AUTHOR: Kevin Rineer
+#+OPTIONS: toc:t num:nil
+* TODO Virtual HPC Lab Project Tasks (Network-First Workflow)
+** Setup and Prep
+   - [X] Ensure host system has required software (Git, QEMU, Ansible) - check_reqs.sh
+   - [X] Download Rocky Linux qcow2 cloud image for VM base - download_qcow2.sh
+
+** 172.16.0.0/24 Virtual Networking Setup (Foundation)
+   - [ ] Create virtual network bridge or tap interface on host (e.g., br0)
+   - [ ] Assign static IP 172.16.0.1 to host bridge as gateway
+   - [ ] Configure IP forwarding and firewall rules for isolation and SSH forwarding
+   - [ ] Write `setup_network.sh` script to automate bridge creation, IP assignment, tap device setup
+   - [ ] Write `teardown_network.sh` script to cleanly dismantle networking environment
+
+** VM Infrastructure Setup (Build on Network)
+   - [ ] Prepare image customization (cloud-init or manual config) for initial setup - 
+   - [ ] shell scripts launch Central IT VM with network interface on created bridge and static IP
+   - [ ] shell scripts launch Storage Node VM similarly with static IP
+   - [ ] shell scripts launch Head Node VM similarly with static IP
+   - [ ] shell scripts launch Login Node VM similarly with static IP
+   - [ ] Launch minimal VMs (Central IT and Head Node) to validate network and VM operation
+   - [ ] Expand scripts to launch Login Node VM
+   - [ ] Expand scripts to launch Compute Node VMs (support multiple instances)
+   - [ ] Implement `start`, `stop`, and `cleanup` commands for whole lab environment in lab.sh
+
+** Foundational step validation
+   - [ ] Test VM-to-VM connectivity with basic ping and SSH using placeholder or minimal VMs
+   - [ ] Document subnet and IP assignments in README/design notes
+
+** Provisioning (Configure Software Stack)
+   - [ ] Create Ansible inventory covering all VMs with their static IPs
+   - [ ] Develop Ansible playbooks/roles:
+       - Central IT: OpenLDAP server setup
+       - Storage Node: NFS server
+       - Head Node: Warewulf, Slurm controller
+       - Login Node: LDAP client, Slurm worker, NFS mount
+   - [ ] Integrate Apptainer container runtime on relevant nodes
+   - [ ] Test user authentication via LDAP from all nodes
+
+** Testing and Validation
+   - [ ] Verify PXE boot process on compute and login nodes
+   - [ ] Test Slurm job scheduling and execution
+   - [ ] Validate NFS mounts and file sharing
+   - [ ] Confirm containerized workload execution with Apptainer
+   - [ ] Verify SSH access and port forwarding works as intended
+
+** Documentation
+   - [ ] Update README with step-by-step instructions and architecture overview
+   - [ ] Document network design and IP scheme
+   - [ ] Include sample job scripts and usage examples
+   - [ ] Anything else?
+
+** Optional Enhancements
+   - [ ] Make the Login node provisioned by warewulf instead of ansible
+   - [ ] Support additional Linux distros?
