@@ -42,9 +42,6 @@ hpc-qemu-lab/
 ├── ansible/                     # Ansible provisioning roles and inventory to configure the "Central IT" and head nodes
 ├── docs/                        # Lab walkthroughs and learning materials (coming eventually)
 ├── images/                      # QEMU disk images (.qcow2) created at runtime
-├── iso/                         # Rocky Linux ISO download directory
-├── logs/                        # Optional: logs or serial output from VMs
-├── lib/                         # Shared shell utilities and constants
 ├── scripts/                     # Core VM and network management scripts
 ├── config.sh                    # Global config: VM specs, version, network
 ├── lab.sh                       # Main CLI wrapper script (start/stop/status/ssh/cleanup)
