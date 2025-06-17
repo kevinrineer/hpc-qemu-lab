@@ -22,7 +22,8 @@ The environment is ideal for students, researchers, or sysadmins who want to lea
 The rationale for why this exists when hpc-toolset-tutorial already does is that this lab provides a different, opinionated, software stack. This is a pretty minimal set of software and lacks the feature set that the hpc-toolset-tutorial's components provides, which I claim to be an advantage.
 
 * Key Features
-- Cross-platform (Linux, macOS, Windows via WSL2)
+- Cross-platform (Linux, macOS via UTM, Windows via Hyper-V)
+    - On non-Linux hosts, Intel VT-x or AMD-V on x86, or Apple's Hypervisor.framework will need to be enabled to support virtualization.
 - Fully automated VM control via shell scripts
 - Ansible-driven provisioning of cluster software inside VMs not provisioned by Warewulf
 - Internal virtual network with SSH port forwarding

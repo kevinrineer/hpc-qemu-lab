@@ -2,10 +2,27 @@
 #+AUTHOR: Kevin Rineer
 #+OPTIONS: toc:t num:nil
 * TODO Virtual HPC Lab Project Tasks (Network-First Workflow)
-** Setup and Prep
+** DONE Setup and Prep
+   CLOSED: [2025-06-17 Tue 08:25]
    - [X] Ensure host system has required software (Git, QEMU, Ansible) - check_reqs.sh
    - [X] Download Rocky Linux qcow2 cloud image for VM base - download_qcow2.sh
-
+** Windows Head Node Setup test
+        Tool: Hyper-V (Recommended) VirtualBox (Backup).
+        Warewulf Head Node VM: Create one Linux VM (e.g., Rocky Linux) in Hyper-V Manager.
+            Network Adapter 1 (Management): Connect to the "Default Switch" (or an "External" switch for direct bridging) for host access (SSH) and internet.
+            Network Adapter 2 (Warewulf Private): First, create a new "Internal" Virtual Switch in Hyper-V Manager (e.g., "Warewulf Lab Network"). Ensure "Allow management operating system to share this network adapter" is checked. Hyper-V does not provide DHCP on Internal or Private switches by default, which is ideal. Then, connect the second adapter of the head node VM to this "Warewulf Lab Network" switch.
+        Warewulf Compute Node VMs: Create multiple Linux VMs in Hyper-V Manager.
+            Network Adapter: Connect only their single network adapter to the same "Warewulf Lab Network" (Internal Virtual Switch) as the Warewulf head node's second adapter.
+            Boot Order: Configure these VMs for PXE boot.
+        (Alternative Tool): VirtualBox is also a viable option if Hyper-V is not preferred or available. The setup would involve creating a "Host-only Network" and ensuring its DHCP server is disabled.
+** MacOS Head Node Setup test
+        Tool: UTM. (This handles the QEMU/HVF acceleration seamlessly).
+        Warewulf Head Node VM: Create one Linux VM (e.g., Rocky Linux) in UTM.
+            Network Adapter 1 (Management): Set to "Shared Network" (NAT) in UTM for host access (SSH) and internet connectivity.
+            Network Adapter 2 (Warewulf Private): Create a new "Virtual Network" in UTM (this acts as a host-only/internal network). Crucially, ensure DHCP is disabled for this virtual network in UTM's settings. Connect the second adapter of the head node VM to this network.
+        Warewulf Compute Node VMs: Create multiple Linux VMs in UTM.
+            Network Adapter: Connect only their single network adapter to the same "Virtual Network" as the Warewulf head node's second adapter.
+            Boot Order: Configure these VMs for PXE boot.
 ** 172.16.0.0/24 Virtual Networking Setup (Foundation)
    - [ ] Create virtual network bridge or tap interface on host (e.g., br0)
    - [ ] Assign static IP 172.16.0.1 to host bridge as gateway
@@ -52,5 +69,6 @@
    - [ ] Anything else?
 
 ** Optional Enhancements
+   - [ ] Support Vagrant provisioning?
    - [ ] Make the Login node provisioned by warewulf instead of ansible
    - [ ] Support additional Linux distros?
